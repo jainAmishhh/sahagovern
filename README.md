@@ -1,6 +1,6 @@
-# 🏙️ Nagrika – Your City, Your Voice
+# 🏙️ SahaGovern – Your City, Your Voice
 
-**Nagrika** is a civic engagement and community platform that bridges the gap between **citizens** and **local authorities**.  
+**SahaGovern** is a civic engagement and community platform that bridges the gap between **citizens** and **local authorities**.  
 It enables residents to **report local issues** (potholes, garbage, streetlights, etc.) with **photos, videos, voice notes, and location**.  
 Reports appear on a **live map** and **community feed**, where people can **upvote, comment, and track progress**.  
 
