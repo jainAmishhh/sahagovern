@@ -8,7 +8,7 @@ On the other side, officials get a **smart dashboard** to manage, assign, and tr
 
 ---
 
-## ✨ Features  
+## ✨ Features   
 
 ### 👤 Citizen App (Mobile)  
 - Report issues with **photo, video, voice & GPS**  
