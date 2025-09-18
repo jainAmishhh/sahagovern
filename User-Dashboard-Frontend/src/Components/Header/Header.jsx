@@ -2,10 +2,10 @@
 
 import { Menu, X } from "lucide-react";
 import React, { useState } from "react";
-
+import { Link, useNavigate } from "react-router-dom"; //perform
 const Header = ({ onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const navigate = useNavigate(); //perform
   return (
     <nav className="fixed w-full z-50 bg-white/90 backdrop-blur-xl border-b border-gray-200 top-0 shadow-sm">
       <div className="container mx-auto px-6 py-4">
@@ -23,20 +23,26 @@ const Header = ({ onLoginClick }) => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {["Features", "How it Works", "Report Preview", "Dashboard Preview"].map(
-              (item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="relative group text-gray-700 hover:text-blue-800 transition-all duration-300 transform hover:scale-105 font-medium"
-                >
-                  {item}
-                  <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 via-45% via-blue-400 to-green-400 group-hover:w-full transition-all duration-300" />
-                </a>
-              )
-            )}
+            {[
+              "Features",
+              "How it Works",
+              "Report Preview",
+              "Dashboard Preview",
+            ].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                className="relative group text-gray-700 hover:text-blue-800 transition-all duration-300 transform hover:scale-105 font-medium"
+              >
+                {item}
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 via-45% via-blue-400 to-green-400 group-hover:w-full transition-all duration-300" />
+              </a>
+            ))}
             <button
-              onClick={onLoginClick}
+              onClick={() => {
+                onLoginClick();
+                navigate("/authPage");
+              }}
               className="bg-gradient-to-r from-blue-700 to-blue-800 text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-blue-600/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border border-blue-600/30 font-semibold"
             >
               Login / Signup
@@ -66,7 +72,7 @@ const Header = ({ onLoginClick }) => {
               </a>
             ))}
             <button
-              onClick={onLoginClick}
+              onClick={() => navigate("/authPage")}
               className="w-full bg-gradient-to-r from-blue-700 to-blue-800 text-white px-6 py-3 rounded-lg shadow-lg font-semibold"
             >
               Login / Signup

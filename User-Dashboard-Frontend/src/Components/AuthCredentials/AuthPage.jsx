@@ -6,17 +6,18 @@ import AuthToggle from "./AuthToggle";
 import AuthMethodSelector from "./AuthMethodSelector";
 import GoogleAuth from "./GoogleAuth";
 import AuthForm from "./AuthForm";
+import { Link, useNavigate } from "react-router-dom"; //perform
 import { Shield, CheckCircle } from "lucide-react";
-import { sendOtp, verifyOtp, signup, login } from "../../utils/api"; 
-
+import { sendOtp, verifyOtp, signup, login } from "../../utils/api";
+//now we doing import navigate
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [authMethod, setAuthMethod] = useState("email"); // 'email' | 'phone' | 'google'
   const [showOtp, setShowOtp] = useState(false);
   const [otpTimer, setOtpTimer] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [error, setError] = useState(""); 
-
+  const [error, setError] = useState("");
+  const navigate = useNavigate(); //perform
   const [formData, setFormData] = useState({
     email: "",
     phonenumber: "",
@@ -73,12 +74,16 @@ const AuthPage = () => {
           await handleSendOtp();
           return;
         } else {
-          await verifyOtp({ phonenumber: formData.phonenumber, otp: formData.otp });
+          await verifyOtp({
+            phonenumber: formData.phonenumber,
+            otp: formData.otp,
+          });
           await signup(formData); // signup after OTP verification
         }
       } else if (authMethod === "email") {
         if (isLogin) {
           await login({ email: formData.email, password: formData.password });
+          navigate("/home"); //perform
         } else {
           if (formData.password !== formData.confirmPassword) {
             setError("Passwords do not match");
@@ -190,9 +195,7 @@ const AuthPage = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
               {isLogin ? "Welcome Back!" : "Account Created!"}
             </h3>
-            <p className="text-gray-600 mb-6">
-              Authentication was successful.
-            </p>
+            <p className="text-gray-600 mb-6">Authentication was successful.</p>
             <button
               onClick={() => {}}
               className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-full hover:from-blue-700 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium"

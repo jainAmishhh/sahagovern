@@ -1,11 +1,26 @@
 // AuthCredentials.jsx
 
-import React, { useState, useEffect } from 'react';
-import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin, Shield, CheckCircle, ArrowRight, Home, UserPlus, LogIn, MessageCircle } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  Phone,
+  MapPin,
+  Shield,
+  CheckCircle,
+  ArrowRight,
+  Home,
+  UserPlus,
+  LogIn,
+  MessageCircle,
+} from "lucide-react";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [authMethod, setAuthMethod] = useState('email'); // 'email', 'phone', 'google'
+  const [authMethod, setAuthMethod] = useState("email"); // 'email', 'phone', 'google'
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showOtp, setShowOtp] = useState(false);
@@ -13,14 +28,14 @@ const AuthPage = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const [formData, setFormData] = useState({
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    fullName: '',
-    city: '',
-    state: '',
-    otp: ''
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    fullName: "",
+    city: "",
+    state: "",
+    otp: "",
   });
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -29,7 +44,7 @@ const AuthPage = () => {
     const handleMouseMove = (e) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth - 0.5) * 2,
-        y: (e.clientY / window.innerHeight - 0.5) * 2
+        y: (e.clientY / window.innerHeight - 0.5) * 2,
       });
     };
 
@@ -37,12 +52,12 @@ const AuthPage = () => {
       setScrollY(window.scrollY);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -57,7 +72,7 @@ const AuthPage = () => {
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -74,12 +89,12 @@ const AuthPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (authMethod === 'phone' && !showOtp) {
+
+    if (authMethod === "phone" && !showOtp) {
       handleSendOtp();
       return;
     }
-    
+
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
   };
@@ -88,14 +103,14 @@ const AuthPage = () => {
     setIsLogin(!isLogin);
     setShowOtp(false);
     setFormData({
-      email: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
-      fullName: '',
-      city: '',
-      state: '',
-      otp: ''
+      email: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
+      fullName: "",
+      city: "",
+      state: "",
+      otp: "",
     });
   };
 
@@ -104,11 +119,11 @@ const AuthPage = () => {
     setShowOtp(false);
     setFormData({
       ...formData,
-      email: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
-      otp: ''
+      email: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
+      otp: "",
     });
   };
 
@@ -116,23 +131,27 @@ const AuthPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 overflow-x-hidden relative">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div 
+        <div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl animate-pulse"
           style={{
-            transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`
+            transform: `translate(${mousePosition.x * 20}px, ${
+              mousePosition.y * 20
+            }px)`,
           }}
         />
-        <div 
+        <div
           className="absolute top-3/4 right-1/4 w-96 h-96 bg-green-200/30 rounded-full blur-3xl animate-pulse"
           style={{
-            transform: `translate(${-mousePosition.x * 15}px, ${-mousePosition.y * 15}px)`
+            transform: `translate(${-mousePosition.x * 15}px, ${
+              -mousePosition.y * 15
+            }px)`,
           }}
         />
-        <div 
+        <div
           className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-indigo-100/20 rounded-full blur-3xl animate-spin"
           style={{
-            animationDuration: '20s',
-            transform: `translate(-50%, -50%) rotate(${scrollY * 0.1}deg)`
+            animationDuration: "20s",
+            transform: `translate(-50%, -50%) rotate(${scrollY * 0.1}deg)`,
           }}
         />
       </div>
@@ -153,8 +172,8 @@ const AuthPage = () => {
               </div>
             </div>
 
-            <button 
-              onClick={() => window.location.href = '/'}
+            <button
+              onClick={() => (window.location.href = "/")}
               className="flex items-center gap-2 text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium"
             >
               <Home size={20} />
@@ -173,13 +192,12 @@ const AuthPage = () => {
               <Shield className="text-white" size={32} />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              {isLogin ? 'Welcome Back' : 'Join सहGovern'}
+              {isLogin ? "Welcome Back" : "Join सहGovern"}
             </h1>
             <p className="text-gray-600">
-              {isLogin 
-                ? 'Sign in to continue making a difference in your community' 
-                : 'Create your account and start reporting civic issues'
-              }
+              {isLogin
+                ? "Sign in to continue making a difference in your community"
+                : "Create your account and start reporting civic issues"}
             </p>
           </div>
 
@@ -188,9 +206,9 @@ const AuthPage = () => {
             <button
               onClick={() => setIsLogin(true)}
               className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
-                isLogin 
-                  ? 'bg-white text-blue-700 shadow-lg transform scale-105' 
-                  : 'text-gray-500 hover:text-gray-700'
+                isLogin
+                  ? "bg-white text-blue-700 shadow-lg transform scale-105"
+                  : "text-gray-500 hover:text-gray-700"
               }`}
             >
               <LogIn size={18} />
@@ -199,9 +217,9 @@ const AuthPage = () => {
             <button
               onClick={() => setIsLogin(false)}
               className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
-                !isLogin 
-                  ? 'bg-white text-green-700 shadow-lg transform scale-105' 
-                  : 'text-gray-500 hover:text-gray-700'
+                !isLogin
+                  ? "bg-white text-green-700 shadow-lg transform scale-105"
+                  : "text-gray-500 hover:text-gray-700"
               }`}
             >
               <UserPlus size={18} />
@@ -213,40 +231,44 @@ const AuthPage = () => {
           <div className="bg-white/70 backdrop-blur-2xl rounded-2xl p-1 mb-6 shadow-lg border border-gray-200/50">
             <div className="grid grid-cols-3 gap-1">
               <button
-                onClick={() => switchAuthMethod('email')}
+                onClick={() => switchAuthMethod("email")}
                 className={`py-3 px-4 rounded-xl font-medium transition-all duration-300 flex flex-col items-center justify-center gap-1 ${
-                  authMethod === 'email'
-                    ? 'bg-blue-500 text-white shadow-lg transform scale-105'
-                    : 'text-gray-600 hover:text-blue-600'
+                  authMethod === "email"
+                    ? "bg-blue-500 text-white shadow-lg transform scale-105"
+                    : "text-gray-600 hover:text-blue-600"
                 }`}
               >
                 <Mail size={20} />
                 <span className="text-xs">Email</span>
               </button>
               <button
-                onClick={() => switchAuthMethod('phone')}
+                onClick={() => switchAuthMethod("phone")}
                 className={`py-3 px-4 rounded-xl font-medium transition-all duration-300 flex flex-col items-center justify-center gap-1 ${
-                  authMethod === 'phone'
-                    ? 'bg-green-500 text-white shadow-lg transform scale-105'
-                    : 'text-gray-600 hover:text-green-600'
+                  authMethod === "phone"
+                    ? "bg-green-500 text-white shadow-lg transform scale-105"
+                    : "text-gray-600 hover:text-green-600"
                 }`}
               >
                 <Phone size={20} />
                 <span className="text-xs">Phone</span>
               </button>
               <button
-                onClick={() => switchAuthMethod('google')}
+                onClick={() => switchAuthMethod("google")}
                 className={`py-3 px-4 rounded-xl font-medium transition-all duration-300 flex flex-col items-center justify-center gap-1 ${
-                  authMethod === 'google'
-                    ? 'bg-red-500 text-white shadow-lg transform scale-105'
-                    : 'text-gray-600 hover:text-red-600'
+                  authMethod === "google"
+                    ? "bg-red-500 text-white shadow-lg transform scale-105"
+                    : "text-gray-600 hover:text-red-600"
                 }`}
               >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                 </svg>
                 <span className="text-xs">Google</span>
               </button>
@@ -254,27 +276,30 @@ const AuthPage = () => {
           </div>
 
           {/* Google Auth Component */}
-          {authMethod === 'google' && (
+          {authMethod === "google" && (
             <div className="bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-2xl border border-gray-200/50">
               <div className="text-center space-y-6">
                 <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full mx-auto mb-6">
-                  <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  <svg
+                    className="w-8 h-8 text-white"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                   </svg>
                 </div>
-                
+
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    {isLogin ? 'Continue with Google' : 'Sign up with Google'}
+                    {isLogin ? "Continue with Google" : "Sign up with Google"}
                   </h3>
                   <p className="text-gray-600 text-sm">
-                    {isLogin 
-                      ? 'Sign in using your Google account for quick access'
-                      : 'Create your account instantly using your Google profile'
-                    }
+                    {isLogin
+                      ? "Sign in using your Google account for quick access"
+                      : "Create your account instantly using your Google profile"}
                   </p>
                 </div>
 
@@ -282,14 +307,33 @@ const AuthPage = () => {
                   onClick={handleGoogleAuth}
                   className="group w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold py-4 px-6 rounded-2xl border-2 border-gray-200 hover:border-red-300 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC04"/>
-                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                  <svg
+                    className="w-6 h-6"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                      fill="#4285F4"
+                    />
+                    <path
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                      fill="#34A853"
+                    />
+                    <path
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                      fill="#FBBC04"
+                    />
+                    <path
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                      fill="#EA4335"
+                    />
                   </svg>
-                  {isLogin ? 'Sign in with Google' : 'Sign up with Google'}
-                  <ArrowRight className="transition-transform group-hover:translate-x-1" size={18} />
+                  {isLogin ? "Sign in with Google" : "Sign up with Google"}
+                  <ArrowRight
+                    className="transition-transform group-hover:translate-x-1"
+                    size={18}
+                  />
                 </button>
 
                 <div className="flex items-center gap-4 text-xs text-gray-500">
@@ -307,7 +351,7 @@ const AuthPage = () => {
           )}
 
           {/* Email/Phone Form */}
-          {(authMethod === 'email' || authMethod === 'phone') && (
+          {(authMethod === "email" || authMethod === "phone") && (
             <div className="bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-2xl border border-gray-200/50">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {!isLogin && (
@@ -318,7 +362,10 @@ const AuthPage = () => {
                         Full Name
                       </label>
                       <div className="relative">
-                        <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                        <User
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={20}
+                        />
                         <input
                           type="text"
                           name="fullName"
@@ -338,7 +385,10 @@ const AuthPage = () => {
                           City
                         </label>
                         <div className="relative">
-                          <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                          <MapPin
+                            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                            size={20}
+                          />
                           <input
                             type="text"
                             name="city"
@@ -381,28 +431,38 @@ const AuthPage = () => {
                 {/* Email or Phone Input */}
                 <div className="space-y-2">
                   <label className="block text-sm font-semibold text-gray-700">
-                    {authMethod === 'email' ? 'Email Address' : 'Phone Number'}
+                    {authMethod === "email" ? "Email Address" : "Phone Number"}
                   </label>
                   <div className="relative">
-                    {authMethod === 'email' ? (
-                      <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    {authMethod === "email" ? (
+                      <Mail
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        size={20}
+                      />
                     ) : (
-                      <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                      <Phone
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        size={20}
+                      />
                     )}
                     <input
-                      type={authMethod === 'email' ? 'email' : 'tel'}
+                      type={authMethod === "email" ? "email" : "tel"}
                       name={authMethod}
                       value={formData[authMethod]}
                       onChange={handleInputChange}
                       className="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-gray-900 placeholder-gray-500 transition-all duration-300"
-                      placeholder={authMethod === 'email' ? 'Enter your email address' : 'Enter your phone number'}
+                      placeholder={
+                        authMethod === "email"
+                          ? "Enter your email address"
+                          : "Enter your phone number"
+                      }
                       required
                     />
                   </div>
                 </div>
 
                 {/* OTP Input for Phone */}
-                {authMethod === 'phone' && showOtp && (
+                {authMethod === "phone" && showOtp && (
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="block text-sm font-semibold text-gray-700">
@@ -413,16 +473,19 @@ const AuthPage = () => {
                         onClick={() => setOtpTimer(30)}
                         disabled={otpTimer > 0}
                         className={`text-sm font-medium ${
-                          otpTimer > 0 
-                            ? 'text-gray-400 cursor-not-allowed' 
-                            : 'text-blue-700 hover:text-blue-900 hover:underline'
+                          otpTimer > 0
+                            ? "text-gray-400 cursor-not-allowed"
+                            : "text-blue-700 hover:text-blue-900 hover:underline"
                         }`}
                       >
-                        {otpTimer > 0 ? `Resend in ${otpTimer}s` : 'Resend OTP'}
+                        {otpTimer > 0 ? `Resend in ${otpTimer}s` : "Resend OTP"}
                       </button>
                     </div>
                     <div className="relative">
-                      <MessageCircle className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                      <MessageCircle
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        size={20}
+                      />
                       <input
                         type="text"
                         name="otp"
@@ -441,15 +504,19 @@ const AuthPage = () => {
                 )}
 
                 {/* Password (Email only or if not OTP flow) */}
-                {(authMethod === 'email' || (authMethod === 'phone' && !showOtp)) && (
+                {(authMethod === "email" ||
+                  (authMethod === "phone" && !showOtp)) && (
                   <div className="space-y-2">
                     <label className="block text-sm font-semibold text-gray-700">
                       Password
                     </label>
                     <div className="relative">
-                      <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                      <Lock
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        size={20}
+                      />
                       <input
-                        type={showPassword ? 'text' : 'password'}
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         value={formData.password}
                         onChange={handleInputChange}
@@ -462,48 +529,71 @@ const AuthPage = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                       >
-                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                        {showPassword ? (
+                          <EyeOff size={20} />
+                        ) : (
+                          <Eye size={20} />
+                        )}
                       </button>
                     </div>
                   </div>
                 )}
 
                 {/* Confirm Password (Sign Up only, Email or Phone without OTP) */}
-                {!isLogin && (authMethod === 'email' || (authMethod === 'phone' && !showOtp)) && (
-                  <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700">
-                      Confirm Password
-                    </label>
-                    <div className="relative">
-                      <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                      <input
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleInputChange}
-                        className="w-full pl-12 pr-12 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-gray-900 placeholder-gray-500 transition-all duration-300"
-                        placeholder="Confirm your password"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                      >
-                        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                      </button>
+                {!isLogin &&
+                  (authMethod === "email" ||
+                    (authMethod === "phone" && !showOtp)) && (
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700">
+                        Confirm Password
+                      </label>
+                      <div className="relative">
+                        <Lock
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                          size={20}
+                        />
+                        <input
+                          type={showConfirmPassword ? "text" : "password"}
+                          name="confirmPassword"
+                          value={formData.confirmPassword}
+                          onChange={handleInputChange}
+                          className="w-full pl-12 pr-12 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-gray-900 placeholder-gray-500 transition-all duration-300"
+                          placeholder="Confirm your password"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                        >
+                          {showConfirmPassword ? (
+                            <EyeOff size={20} />
+                          ) : (
+                            <Eye size={20} />
+                          )}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                 {/* Remember Me / Forgot Password (Login only, Email) */}
-                {isLogin && authMethod === 'email' && (
+                {isLogin && authMethod === "email" && (
                   <div className="flex items-center justify-between">
                     <label className="flex items-center">
-                      <input type="checkbox" className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" />
-                      <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                      <input
+                        type="checkbox"
+                        className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                      />
+                      <span className="ml-2 text-sm text-gray-600">
+                        Remember me
+                      </span>
                     </label>
-                    <button type="button" className="text-sm text-blue-700 hover:text-blue-900 font-medium hover:underline">
+                    <button
+                      type="button"
+                      className="text-sm text-blue-700 hover:text-blue-900 font-medium hover:underline"
+                    >
                       Forgot password?
                     </button>
                   </div>
@@ -513,25 +603,41 @@ const AuthPage = () => {
                 <button
                   type="submit"
                   className={`group w-full font-bold text-lg py-4 rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border-2 flex items-center justify-center gap-3 ${
-                    authMethod === 'email'
-                      ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white hover:shadow-blue-500/25 border-blue-500/30'
-                      : 'bg-gradient-to-r from-green-600 to-green-800 text-white hover:shadow-green-500/25 border-green-500/30'
+                    authMethod === "email"
+                      ? "bg-gradient-to-r from-blue-600 to-blue-800 text-white hover:shadow-blue-500/25 border-blue-500/30"
+                      : "bg-gradient-to-r from-green-600 to-green-800 text-white hover:shadow-green-500/25 border-green-500/30"
                   }`}
                 >
-                  {authMethod === 'phone' && !showOtp
-                    ? (isLogin ? 'Send OTP' : 'Send Verification Code')
-                    : (isLogin ? 'Sign In to Account' : 'Create Account')
-                  }
-                  <ArrowRight className="transition-transform group-hover:translate-x-1" size={20} />
+                  {authMethod === "phone" && !showOtp
+                    ? isLogin
+                      ? "Send OTP"
+                      : "Send Verification Code"
+                    : isLogin
+                    ? "Sign In to Account"
+                    : "Create Account"}
+                  <ArrowRight
+                    className="transition-transform group-hover:translate-x-1"
+                    size={20}
+                  />
                 </button>
 
                 {/* Terms and Privacy (Sign Up only) */}
                 {!isLogin && (
                   <p className="text-xs text-gray-500 text-center leading-relaxed">
-                    By creating an account, you agree to our{' '}
-                    <button type="button" className="text-blue-700 hover:underline font-medium">Terms of Service</button>{' '}
-                    and{' '}
-                    <button type="button" className="text-blue-700 hover:underline font-medium">Privacy Policy</button>
+                    By creating an account, you agree to our{" "}
+                    <button
+                      type="button"
+                      className="text-blue-700 hover:underline font-medium"
+                    >
+                      Terms of Service
+                    </button>{" "}
+                    and{" "}
+                    <button
+                      type="button"
+                      className="text-blue-700 hover:underline font-medium"
+                    >
+                      Privacy Policy
+                    </button>
                   </p>
                 )}
               </form>
@@ -546,7 +652,7 @@ const AuthPage = () => {
                 onClick={toggleForm}
                 className="ml-2 text-blue-700 hover:text-blue-900 font-semibold hover:underline transition-colors duration-300"
               >
-                {isLogin ? 'Sign up here' : 'Sign in here'}
+                {isLogin ? "Sign up here" : "Sign in here"}
               </button>
             </p>
           </div>
@@ -573,17 +679,16 @@ const AuthPage = () => {
               <CheckCircle className="mx-auto text-green-600 mb-4" size={48} />
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              {isLogin ? 'Welcome Back!' : 'Account Created!'}
+              {isLogin ? "Welcome Back!" : "Account Created!"}
             </h3>
             <p className="text-gray-600 mb-6">
-              {authMethod === 'google'
-                ? (isLogin 
-                    ? 'You have been successfully signed in with Google.' 
-                    : 'Your account has been created successfully using Google.')
-                : (isLogin 
-                    ? 'You have been successfully signed in.' 
-                    : 'Your account has been created successfully. You can now start reporting civic issues.')
-              }
+              {authMethod === "google"
+                ? isLogin
+                  ? "You have been successfully signed in with Google."
+                  : "Your account has been created successfully using Google."
+                : isLogin
+                ? "You have been successfully signed in."
+                : "Your account has been created successfully. You can now start reporting civic issues."}
             </p>
             <button
               onClick={() => setShowSuccess(false)}
@@ -597,17 +702,19 @@ const AuthPage = () => {
 
       {/* Background Pattern */}
       <div className="fixed inset-0 opacity-5 pointer-events-none">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: '60px 60px'
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: "60px 60px",
+          }}
+        />
       </div>
     </div>
   );
 };
 
 export default AuthPage;
-
 
 // import React, { useState, useEffect } from 'react';
 // import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin, Shield, CheckCircle, ArrowRight, Home, UserPlus, LogIn } from 'lucide-react';
@@ -681,19 +788,19 @@ export default AuthPage;
 //     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 overflow-x-hidden relative">
 //       {/* Animated Background Elements */}
 //       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-//         <div 
+//         <div
 //           className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl animate-pulse"
 //           style={{
 //             transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`
 //           }}
 //         />
-//         <div 
+//         <div
 //           className="absolute top-3/4 right-1/4 w-96 h-96 bg-green-200/30 rounded-full blur-3xl animate-pulse"
 //           style={{
 //             transform: `translate(${-mousePosition.x * 15}px, ${-mousePosition.y * 15}px)`
 //           }}
 //         />
-//         <div 
+//         <div
 //           className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-indigo-100/20 rounded-full blur-3xl animate-spin"
 //           style={{
 //             animationDuration: '20s',
@@ -718,7 +825,7 @@ export default AuthPage;
 //               </div>
 //             </div>
 
-//             <button 
+//             <button
 //               onClick={() => window.location.href = '/'}
 //               className="flex items-center gap-2 text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium"
 //             >
@@ -741,8 +848,8 @@ export default AuthPage;
 //               {isLogin ? 'Welcome Back' : 'Join सहGovern'}
 //             </h1>
 //             <p className="text-gray-600">
-//               {isLogin 
-//                 ? 'Sign in to continue making a difference in your community' 
+//               {isLogin
+//                 ? 'Sign in to continue making a difference in your community'
 //                 : 'Create your account and start reporting civic issues'
 //               }
 //             </p>
@@ -753,8 +860,8 @@ export default AuthPage;
 //             <button
 //               onClick={() => setIsLogin(true)}
 //               className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
-//                 isLogin 
-//                   ? 'bg-white text-blue-700 shadow-lg transform scale-105' 
+//                 isLogin
+//                   ? 'bg-white text-blue-700 shadow-lg transform scale-105'
 //                   : 'text-gray-500 hover:text-gray-700'
 //               }`}
 //             >
@@ -764,8 +871,8 @@ export default AuthPage;
 //             <button
 //               onClick={() => setIsLogin(false)}
 //               className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
-//                 !isLogin 
-//                   ? 'bg-white text-green-700 shadow-lg transform scale-105' 
+//                 !isLogin
+//                   ? 'bg-white text-green-700 shadow-lg transform scale-105'
 //                   : 'text-gray-500 hover:text-gray-700'
 //               }`}
 //             >
@@ -954,8 +1061,8 @@ export default AuthPage;
 //               <button
 //                 onClick={handleSubmit}
 //                 className={`group w-full font-bold text-lg py-4 rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border-2 flex items-center justify-center gap-3 ${
-//                   isLogin 
-//                     ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white hover:shadow-blue-500/25 border-blue-500/30' 
+//                   isLogin
+//                     ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white hover:shadow-blue-500/25 border-blue-500/30'
 //                     : 'bg-gradient-to-r from-green-600 to-green-800 text-white hover:shadow-green-500/25 border-green-500/30'
 //                 }`}
 //               >
@@ -1013,8 +1120,8 @@ export default AuthPage;
 //               {isLogin ? 'Welcome Back!' : 'Account Created!'}
 //             </h3>
 //             <p className="text-gray-600 mb-6">
-//               {isLogin 
-//                 ? 'You have been successfully signed in.' 
+//               {isLogin
+//                 ? 'You have been successfully signed in.'
 //                 : 'Your account has been created successfully. You can now start reporting civic issues.'
 //               }
 //             </p>
