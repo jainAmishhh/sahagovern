@@ -1,3 +1,5 @@
+// StepsAccordion.jsx
+
 import { ChevronRight } from "lucide-react";
 
 const StepsAccordion = ({ steps, activeStep, setActiveStep }) => (

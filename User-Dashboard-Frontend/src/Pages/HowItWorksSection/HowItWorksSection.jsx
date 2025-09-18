@@ -1,3 +1,5 @@
+// HowItWorksSection.jsx
+
 import {
   Smartphone,
   ClipboardList,

@@ -1,3 +1,5 @@
+// NewPostModal.jsx
+
 import React, { useState } from "react";
 import { X, Upload } from "lucide-react";
 

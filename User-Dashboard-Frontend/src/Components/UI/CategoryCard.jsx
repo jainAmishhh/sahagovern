@@ -1,3 +1,5 @@
+// CategoryCard.jsx
+
 import { Lightbulb } from "lucide-react";
 import React from "react";
 

@@ -1,3 +1,5 @@
+// Herosection.jsx
+
 import { Bell, CheckCircle, ChevronRight, Star, TrendingUp, Users } from "lucide-react";
 import React from "react";
 

@@ -1,3 +1,5 @@
+// NewPostForm.jsx
+
 // import React, { useState } from "react";
 // import { Plus, X, Upload, User, MapPin, Calendar } from "lucide-react";
 // import addpost from '../../utils/api.js';

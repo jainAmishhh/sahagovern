@@ -1,3 +1,5 @@
+// ReportPreview.jsx
+
 import React from "react";
 import { FileText, LogIn, CheckCircle, Clock, AlertCircle } from "lucide-react";
 

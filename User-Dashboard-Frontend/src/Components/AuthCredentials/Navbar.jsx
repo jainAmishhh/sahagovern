@@ -1,3 +1,5 @@
+// Navbar.jsx
+
 import React from "react";
 import { Home } from "lucide-react";
 

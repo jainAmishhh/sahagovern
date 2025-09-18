@@ -1,3 +1,5 @@
+// RightSidebar.jsx
+
 import React from "react";
 import Sidebar from "../UI/Sidebar.jsx";
 import { Sparkles, Award, Phone } from "lucide-react";

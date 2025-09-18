@@ -1,3 +1,5 @@
+// StepsTimeline.jsx
+
 import { ArrowRight } from "lucide-react";
 
 const StepsTimeline = ({ steps, isVisible }) => (

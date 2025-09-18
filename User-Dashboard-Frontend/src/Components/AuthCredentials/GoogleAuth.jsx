@@ -1,3 +1,5 @@
+// GoogleAuth.jsx
+
 import React from "react";
 import { Shield, CheckCircle, ArrowRight } from "lucide-react";
 

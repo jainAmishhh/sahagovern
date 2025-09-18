@@ -1,3 +1,4 @@
+// AuthPage.jsx
 
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
@@ -6,7 +7,7 @@ import AuthMethodSelector from "./AuthMethodSelector";
 import GoogleAuth from "./GoogleAuth";
 import AuthForm from "./AuthForm";
 import { Shield, CheckCircle } from "lucide-react";
-import { sendOtp, verifyOtp, signup, login } from "../../utils/api"; // ✅ backend API
+import { sendOtp, verifyOtp, signup, login } from "../../utils/api"; 
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,7 +15,7 @@ const AuthPage = () => {
   const [showOtp, setShowOtp] = useState(false);
   const [otpTimer, setOtpTimer] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [error, setError] = useState(""); // ✅ error state
+  const [error, setError] = useState(""); 
 
   const [formData, setFormData] = useState({
     email: "",

@@ -1,3 +1,5 @@
+// DashboardPreview.jsx
+
 import React from "react";
 import { LayoutDashboard, ShieldCheck, LogIn, BarChart3, Users, Clock, TrendingUp, MapPin, Bell } from "lucide-react";
 

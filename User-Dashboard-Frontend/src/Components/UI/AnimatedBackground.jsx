@@ -1,3 +1,5 @@
+// AnimatedBackground.jsx
+
 import React from "react";
 
 const AnimatedBackground = ({ mousePosition }) => (

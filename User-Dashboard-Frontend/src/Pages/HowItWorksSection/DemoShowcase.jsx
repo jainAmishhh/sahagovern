@@ -1,3 +1,5 @@
+// DemoShowcase.jsx
+
 import { ArrowRight, Play, MessageSquare, CheckCircle, Award } from "lucide-react";
 
 const DemoShowcase = () => (

@@ -1,4 +1,6 @@
-  import React, { useState, useEffect } from 'react';
+// SocialCivicPlatform.jsx
+
+import React, { useState, useEffect } from 'react';
   import { 
     Plus, MapPin, Eye, ThumbsUp, Clock, CheckCircle, AlertTriangle, 
     Zap, Users, TrendingUp, Award, Bell, Search, Filter, Camera,

@@ -1,3 +1,5 @@
+// AuthToggle.jsx
+
 import React from "react";
 import { LogIn, UserPlus } from "lucide-react";
 

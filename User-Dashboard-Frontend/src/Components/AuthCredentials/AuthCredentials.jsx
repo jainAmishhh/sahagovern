@@ -1,3 +1,5 @@
+// AuthCredentials.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin, Shield, CheckCircle, ArrowRight, Home, UserPlus, LogIn, MessageCircle } from 'lucide-react';
 

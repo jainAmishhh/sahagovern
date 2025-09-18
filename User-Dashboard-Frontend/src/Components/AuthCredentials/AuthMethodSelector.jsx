@@ -1,3 +1,5 @@
+// AuthMethodSelector.jsx
+
 import React from "react";
 import { Mail, Phone } from "lucide-react";
 

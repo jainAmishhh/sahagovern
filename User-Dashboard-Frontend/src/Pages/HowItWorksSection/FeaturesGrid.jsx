@@ -1,3 +1,5 @@
+// FeaturesGrid.jsx
+
 const FeaturesGrid = ({ features }) => (
   <div className="mb-20">
     <h3 className="text-3xl font-bold text-center text-gray-800 mb-12">

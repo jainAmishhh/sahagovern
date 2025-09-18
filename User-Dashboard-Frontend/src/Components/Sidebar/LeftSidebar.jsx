@@ -1,3 +1,5 @@
+// LeftSidebar.jsx
+
 import React from "react";
 import Sidebar from "../UI/Sidebar.jsx";
 import CategoryCard from "../UI/CategoryCard.jsx";

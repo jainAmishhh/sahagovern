@@ -1,3 +1,5 @@
+// SectionHeader.jsx
+
 const SectionHeader = () => (
   <div className="text-center mb-20">
     <h2 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-700 bg-clip-text text-transparent">

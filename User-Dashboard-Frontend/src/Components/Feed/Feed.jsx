@@ -1,3 +1,5 @@
+// Feed.jsx
+
 import React from "react";
 import PostCard from "../UI/PostCard.jsx";
 
