@@ -12,23 +12,16 @@ import AuthPage from './Components/AuthCredentials/AuthPage.jsx';
 import SocialCivicPlatform from './Pages/SocialCivicPlatform/SocialCivicPlatform.jsx';
 import AuthAccess from './Components/AuthCredentials/AuthAccess.jsx';
 import Home from './Pages/Home/Home.jsx';
-import TestFeed from './Components/UI/TestFeed.jsx';
 
 const App = () => {
-  const [showAuth, setShowAuth] = useState(false);
-
-  const handleAuthToggle = () => setShowAuth(true);
-  const handleBackToLanding = () => setShowAuth(false);
-
   return (
     <div>
       {showAuth ? (
         <AuthPage onBack={handleBackToLanding} />
       ) : (
         <>
-        <TestFeed />
         {/* <Home /> */}
-        {/* <AuthAccess onLoginClick={handleAuthToggle}/> */}
+        <AuthAccess onLoginClick={handleAuthToggle}/>
          {/* <SocialCivicPlatform /> */}
           {/* <Header onLoginClick={handleAuthToggle} />
           <Herosection />
