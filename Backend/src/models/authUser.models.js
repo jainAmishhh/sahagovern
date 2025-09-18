@@ -17,12 +17,10 @@ const userSchema = new Schema(
       lowercase: true,
       unique: true, 
       sparse: true, 
-      required: true,
     },
 
     password: {
       type: String,
-      required: true,
     },
 
     phonenumber: {
@@ -58,12 +56,16 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    role: {
+      type: String,
+      default: "user",
+    },
     bio: {
       type: String,
       default: "",
     },
     gender: {
-      type: String,
+      type: String, 
       enum: ["male", "female"],
     },
 

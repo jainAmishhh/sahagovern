@@ -10,6 +10,7 @@
     Flag, Edit3, Trash, Reply, ChevronDown, ChevronUp, X, Trophy,
     Sparkles, Flame, Waves
   } from 'lucide-react';
+import NewPostForm from '../../Components/AddPost/NewPostForm';
 
   // Enhanced Background Component
   const AnimatedBackground = ({ mousePosition }) => (
@@ -103,8 +104,9 @@
           </div>
 
           {/* Enhanced Action Buttons */}
-          <div className="flex items-center space-x-4">
-            <button 
+          <div className="flex items-center space-x-4 ">
+            <NewPostForm />
+            {/* <button 
               onClick={onNewPost}
               className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             >
@@ -130,7 +132,7 @@
                 <User className="text-white" size={20} />
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -695,7 +697,7 @@
               </Sidebar>
 
               {/* Trending Topics */}
-              <Sidebar title="Trending Now" icon={TrendingUp}>
+              {/* <Sidebar title="Trending Now" icon={TrendingUp}>
                 <div className="space-y-4">
                   {[
                     { tag: '#StreetLight', count: 142, color: 'text-yellow-600' },
@@ -711,7 +713,7 @@
                     </div>
                   ))}
                 </div>
-              </Sidebar>
+              </Sidebar> */}
 
               {/* Your Impact */}
               <Sidebar title="Your Impact" icon={Target}>

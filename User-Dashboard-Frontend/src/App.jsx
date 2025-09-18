@@ -25,8 +25,8 @@ const App = () => {
       ) : (
         <>
         {/* <Home /> */}
-        {/* <AuthAccess onLoginClick={handleAuthToggle}/> */}
-         <SocialCivicPlatform />
+        <AuthAccess onLoginClick={handleAuthToggle}/>
+         {/* <SocialCivicPlatform /> */}
           {/* <Header onLoginClick={handleAuthToggle} />
           <Herosection />
           <Features />

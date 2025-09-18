@@ -5,7 +5,7 @@ import CategoryCard from "../UI/CategoryCard.jsx";
 // ---------------- Categories Section ----------------
 const CategoriesSection = ({ categories, selectedCategory, setSelectedCategory }) => {
   return (
-    <Sidebar title="Categories">
+    <Sidebar title="Categories" icon={Filter}>
       <div className="grid grid-cols-2 sm:grid-cols-1 gap-3">
         {categories.map((category) => (
           <CategoryCard
@@ -20,34 +20,26 @@ const CategoriesSection = ({ categories, selectedCategory, setSelectedCategory }
   );
 };
 
-// ---------------- Trending Section ----------------
-const TrendingSection = () => {
-  const trends = ["Water Supply", "Road Repair", "Garbage"];
-
-  return (
-    <Sidebar title="Trending">
-      <ul className="space-y-2 text-sm">
-        {trends.map((trend, i) => (
-          <li key={i} className="flex justify-between items-center text-gray-700">
-            <span>#{trend}</span>
-            <span className="text-gray-400">+{Math.floor(Math.random() * 50)}</span>
-          </li>
-        ))}
-      </ul>
-    </Sidebar>
-  );
-};
-
 // ---------------- Your Impact Section ----------------
 const YourImpactSection = () => {
-  const impact = { reported: 12, resolved: 8, pending: 4 };
+  const stats = [
+    { label: 'Issues Reported', value: 12, color: 'text-blue-700', icon: AlertTriangle },
+    { label: 'Issues Resolved', value: 8, color: 'text-green-700', icon: CheckCircle },
+    { label: 'Community Score', value: 850, color: 'text-purple-700', icon: Star }
+  ];
 
   return (
-    <Sidebar title="Your Impact">
-      <div className="space-y-2 text-sm">
-        <p>Issues Reported: {impact.reported}</p>
-        <p>Resolved: {impact.resolved}</p>
-        <p>Pending: {impact.pending}</p>
+    <Sidebar title="Your Impact" icon={Target}>
+      <div className="space-y-6 text-sm">
+        {stats.map((stat, index) => (
+          <div key={index} className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl hover:shadow-lg transition-all duration-300">
+            <div className="flex items-center gap-3">
+              <stat.icon size={20} className={stat.color} />
+              <span className="font-medium text-gray-700">{stat.label}</span>
+            </div>
+            <span className={`font-bold text-xl ${stat.color}`}>{stat.value}</span>
+          </div>
+        ))}
       </div>
     </Sidebar>
   );
@@ -55,20 +47,25 @@ const YourImpactSection = () => {
 
 // ---------------- Active Heroes Section ----------------
 const ActiveHeroesSection = () => {
-  const heroes = ["Amit", "Sneha", "Ravi", "Priya"];
+  const users = [
+    { name: "Bhopal Municipal", avatar: "🏛️", status: "Responding to issues", online: true },
+    { name: "Dr. Priya Sharma", avatar: "👩‍⚕️", status: "Sharing solutions", online: true },
+    { name: "Local Electrician", avatar: "⚡", status: "Offering help", online: true }
+  ];
 
   return (
-    <Sidebar title="Active Heroes">
-      <div className="space-y-2">
-        {heroes.map((hero, i) => (
-          <div
-            key={i}
-            className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-50"
-          >
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold">
-              {hero[0]}
+    <Sidebar title="Active Heroes" icon={Users}>
+      <div className="space-y-4">
+        {users.map((user, index) => (
+          <div key={index} className="flex items-center gap-4 p-3 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+            <div className="relative text-2xl">
+              <span>{user.avatar}</span>
+              {user.online && <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>}
             </div>
-            <span className="text-sm text-gray-700">{hero}</span>
+            <div className="flex-1">
+              <div className="font-semibold text-gray-900">{user.name}</div>
+              <div className="text-sm text-gray-500">{user.status}</div>
+            </div>
           </div>
         ))}
       </div>
@@ -85,7 +82,6 @@ const LeftSidebar = ({ categories, selectedCategory, setSelectedCategory }) => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <TrendingSection />
       <YourImpactSection />
       <ActiveHeroesSection />
     </div>
