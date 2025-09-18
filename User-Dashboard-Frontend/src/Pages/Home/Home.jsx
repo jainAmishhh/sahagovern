@@ -1,9 +1,6 @@
-// Home.jsx
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 /* ---------- UI Components ---------- */
-import AnimatedBackground from "../../Components/UI/AnimatedBackground.jsx";
 import Header from "../../Components/UI/Header.jsx";
 import NewPostModal from "../../Components/UI/NewPostModal.jsx";
 
@@ -17,25 +14,20 @@ import RightSidebar from "../../Components/Sidebar/RightSidebar.jsx";
 /* ---------- Icons ---------- */
 import { Plus } from "lucide-react";
 
+/* ---------- Constants ---------- */
+const CATEGORIES = [
+  { id: 1, name: "Infrastructure" },
+  { id: 2, name: "Utilities" },
+  { id: 3, name: "Environment" },
+];
+
 const Home = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  /* -------------------- State -------------------- */
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const [showNewPostModal, setShowNewPostModal] = useState(false);
-
-  /* -------------------- Effects -------------------- */
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 2,
-        y: (e.clientY / window.innerHeight - 0.5) * 2,
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   /* -------------------- Handlers -------------------- */
   const handleLike = (postId) => {
@@ -62,34 +54,28 @@ const Home = () => {
     console.log(`Shared post ${postId}`);
   };
 
+  const handleAddPost = (newPost) => {
+    setPosts((prev) => [newPost, ...prev]);
+  };
+
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 text-gray-900">
-      {/* Background */}
-      <AnimatedBackground mousePosition={mousePosition} />
-
       {/* Header */}
-      <Header
-        onNewPost={() => setShowNewPostModal(true)}
-        mousePosition={mousePosition}
-      />
+      <Header onNewPost={() => setShowNewPostModal(true)} />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
         {/* Left Sidebar */}
-        <div className="hidden lg:block lg:col-span-3 space-y-6">
+        <aside className="hidden lg:block lg:col-span-3 space-y-6">
           <LeftSidebar
-            categories={[
-              { id: 1, name: "Infrastructure" },
-              { id: 2, name: "Utilities" },
-              { id: 3, name: "Environment" },
-            ]}
+            categories={CATEGORIES}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
           />
-        </div>
+        </aside>
 
         {/* Feed */}
-        <div className="col-span-1 lg:col-span-6 space-y-6">
+        <section className="col-span-1 lg:col-span-6 space-y-6">
           <Feed
             posts={posts}
             selectedCategory={selectedCategory}
@@ -97,23 +83,25 @@ const Home = () => {
             onToggleLike={handleLike}
           />
 
+          {/* <Outlet /> */}
+
           {/* No posts fallback */}
           {posts.length === 0 && (
             <div className="text-center text-gray-500">No posts available.</div>
           )}
-        </div>
+        </section>
 
         {/* Right Sidebar */}
-        <div className="hidden lg:block lg:col-span-3 space-y-6">
+        <aside className="hidden lg:block lg:col-span-3 space-y-6">
           <RightSidebar />
-        </div>
+        </aside>
       </main>
 
       {/* New Post Modal */}
       <NewPostModal
         isOpen={showNewPostModal}
         onClose={() => setShowNewPostModal(false)}
-        onSubmit={(newPost) => setPosts([newPost, ...posts])}
+        onSubmit={handleAddPost}
       />
 
       {/* Floating Action Button (mobile only) */}
@@ -128,6 +116,8 @@ const Home = () => {
 };
 
 export default Home;
+
+
 
 
 // import React, { useState, useEffect } from "react";
