@@ -2,7 +2,7 @@
 
 import dotenv from "dotenv";
 import { app } from "./app.js";
-import ConnectToMongoDB from "./db/authUser.db.js";
+import ConnectToMongoDB from "./src/db/authUser.db.js";
 
 // Load .env file from same folder
 dotenv.config({ path: "./.env" });

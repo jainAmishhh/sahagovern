@@ -1,7 +1,8 @@
+// Header.jsx
 import { Menu, X } from "lucide-react";
 import React, { useState } from "react";
 
-const Header = () => {
+const Header = ({ onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -22,7 +23,7 @@ const Header = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {["Features", "How it Works", "Report Preview", "Dashboard Preview"].map(
-              (item, index) => (
+              (item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
@@ -33,7 +34,10 @@ const Header = () => {
                 </a>
               )
             )}
-            <button className="bg-gradient-to-r from-blue-700 to-blue-800 text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-blue-600/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border border-blue-600/30 font-semibold">
+            <button
+              onClick={onLoginClick}
+              className="bg-gradient-to-r from-blue-700 to-blue-800 text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-blue-600/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border border-blue-600/30 font-semibold"
+            >
               Login / Signup
             </button>
           </div>
@@ -60,7 +64,10 @@ const Header = () => {
                 {item}
               </a>
             ))}
-            <button className="w-full bg-gradient-to-r from-blue-700 to-blue-800 text-white px-6 py-3 rounded-lg shadow-lg font-semibold">
+            <button
+              onClick={onLoginClick}
+              className="w-full bg-gradient-to-r from-blue-700 to-blue-800 text-white px-6 py-3 rounded-lg shadow-lg font-semibold"
+            >
               Login / Signup
             </button>
           </div>

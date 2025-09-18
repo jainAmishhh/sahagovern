@@ -1,5 +1,18 @@
+
 import React, { useState } from "react";
-import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin, Shield, CheckCircle, ArrowRight, MessageCircle } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  Phone,
+  MapPin,
+  Shield,
+  CheckCircle,
+  ArrowRight,
+  MessageCircle,
+} from "lucide-react";
 
 const AuthForm = ({
   isLogin,
@@ -7,13 +20,11 @@ const AuthForm = ({
   formData,
   onChange,
   showOtp,
-  setShowOtp,
   otpTimer,
-  setOtpTimer,
   handleSendOtp,
   handleSubmit,
   toggleForm,
-  setIsLogin,
+  error, // ✅ receive error
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -25,13 +36,18 @@ const AuthForm = ({
           <>
             {/* Full Name */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-gray-700">Full Name</label>
+              <label className="block text-sm font-semibold text-gray-700">
+                Full Name
+              </label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <User
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="text"
-                  name="fullName"
-                  value={formData.fullName}
+                  name="fullname"
+                  value={formData.fullname}
                   onChange={onChange}
                   className="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-gray-900 placeholder-gray-500 transition-all duration-300"
                   placeholder="Enter your full name"
@@ -43,9 +59,14 @@ const AuthForm = ({
             {/* Location */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">City</label>
+                <label className="block text-sm font-semibold text-gray-700">
+                  City
+                </label>
                 <div className="relative">
-                  <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  <MapPin
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    size={20}
+                  />
                   <input
                     type="text"
                     name="city"
@@ -58,7 +79,9 @@ const AuthForm = ({
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">State</label>
+                <label className="block text-sm font-semibold text-gray-700">
+                  State
+                </label>
                 <select
                   name="state"
                   value={formData.state}
@@ -90,9 +113,15 @@ const AuthForm = ({
           </label>
           <div className="relative">
             {authMethod === "email" ? (
-              <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Mail
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
             ) : (
-              <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Phone
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
             )}
             <input
               type={authMethod === "email" ? "email" : "tel"}
@@ -100,28 +129,41 @@ const AuthForm = ({
               value={formData[authMethod]}
               onChange={onChange}
               className="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-gray-900 placeholder-gray-500 transition-all duration-300"
-              placeholder={authMethod === "email" ? "Enter your email address" : "Enter your phone number"}
+              placeholder={
+                authMethod === "email"
+                  ? "Enter your email address"
+                  : "Enter your phone number"
+              }
               required
             />
           </div>
         </div>
 
         {/* OTP Input */}
-        {authMethod === "phone" && showOtp && (
+        {authMethod === "phonenumber" && showOtp && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="block text-sm font-semibold text-gray-700">Enter OTP</label>
+              <label className="block text-sm font-semibold text-gray-700">
+                Enter OTP
+              </label>
               <button
                 type="button"
-                onClick={() => setOtpTimer(30)}
+                onClick={handleSendOtp} // ✅ now calls backend
                 disabled={otpTimer > 0}
-                className={`text-sm font-medium ${otpTimer > 0 ? "text-gray-400 cursor-not-allowed" : "text-blue-700 hover:text-blue-900 hover:underline"}`}
+                className={`text-sm font-medium ${
+                  otpTimer > 0
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "text-blue-700 hover:text-blue-900 hover:underline"
+                }`}
               >
                 {otpTimer > 0 ? `Resend in ${otpTimer}s` : "Resend OTP"}
               </button>
             </div>
             <div className="relative">
-              <MessageCircle className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <MessageCircle
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
               <input
                 type="text"
                 name="otp"
@@ -133,16 +175,24 @@ const AuthForm = ({
                 required
               />
             </div>
-            <p className="text-sm text-gray-500 text-center">OTP sent to {formData.phone}</p>
+            <p className="text-sm text-gray-500 text-center">
+              OTP sent to {formData.phonenumber}
+            </p>
           </div>
         )}
 
         {/* Password */}
-        {(authMethod === "email" || (authMethod === "phone" && !showOtp)) && (
+        {(authMethod === "email" ||
+          (authMethod === "phonenumber" && !showOtp)) && (
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Password</label>
+            <label className="block text-sm font-semibold text-gray-700">
+              Password
+            </label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Lock
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                size={20}
+              />
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -164,39 +214,52 @@ const AuthForm = ({
         )}
 
         {/* Confirm Password */}
-        {!isLogin && (authMethod === "email" || (authMethod === "phone" && !showOtp)) && (
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Confirm Password</label>
-            <div className="relative">
-              <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={onChange}
-                className="w-full pl-12 pr-12 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-gray-900 placeholder-gray-500 transition-all duration-300"
-                placeholder="Confirm your password"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword((s) => !s)}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+        {!isLogin &&
+          (authMethod === "email" ||
+            (authMethod === "phonenumber" && !showOtp)) && (
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <Lock
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={onChange}
+                  className="w-full pl-12 pr-12 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-gray-900 placeholder-gray-500 transition-all duration-300"
+                  placeholder="Confirm your password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword((s) => !s)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Remember / Forgot */}
         {isLogin && authMethod === "email" && (
           <div className="flex items-center justify-between">
             <label className="flex items-center">
-              <input type="checkbox" className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" />
+              <input
+                type="checkbox"
+                className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+              />
               <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
-            <button type="button" className="text-sm text-blue-700 hover:text-blue-900 font-medium hover:underline">
+            <button
+              type="button"
+              className="text-sm text-blue-700 hover:text-blue-900 font-medium hover:underline"
+            >
               Forgot password?
             </button>
           </div>
@@ -211,19 +274,43 @@ const AuthForm = ({
               : "bg-gradient-to-r from-green-600 to-green-800 text-white hover:shadow-green-500/25 border-green-500/30"
           }`}
         >
-          {authMethod === "phone" && !showOtp
-            ? (isLogin ? "Send OTP" : "Send Verification Code")
-            : (isLogin ? "Sign In to Account" : "Create Account")}
-          <ArrowRight className="transition-transform group-hover:translate-x-1" size={20} />
+          {authMethod === "phonenumber" && !showOtp
+            ? isLogin
+              ? "Send OTP"
+              : "Send Verification Code"
+            : isLogin
+            ? "Sign In to Account"
+            : "Create Account"}
+          <ArrowRight
+            className="transition-transform group-hover:translate-x-1"
+            size={20}
+          />
         </button>
+
+        {/* ✅ Error Message */}
+        {error && (
+          <p className="text-red-600 text-sm text-center font-medium mt-3">
+            {error}
+          </p>
+        )}
 
         {/* Terms */}
         {!isLogin && (
           <p className="text-xs text-gray-500 text-center leading-relaxed">
             By creating an account, you agree to our{" "}
-            <button type="button" className="text-blue-700 hover:underline font-medium">Terms of Service</button>{" "}
+            <button
+              type="button"
+              className="text-blue-700 hover:underline font-medium"
+            >
+              Terms of Service
+            </button>{" "}
             and{" "}
-            <button type="button" className="text-blue-700 hover:underline font-medium">Privacy Policy</button>
+            <button
+              type="button"
+              className="text-blue-700 hover:underline font-medium"
+            >
+              Privacy Policy
+            </button>
           </p>
         )}
       </form>

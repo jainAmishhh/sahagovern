@@ -14,7 +14,6 @@ const Navbar = () => {
               <span className="text-4xl font-bold bg-gradient-to-r from-green-700 to-green-900 bg-clip-text text-transparent">
                 govern
               </span>
-              <div className="absolute -top-2 -right-2 w-3 h-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-ping" />
             </div>
           </div>
 

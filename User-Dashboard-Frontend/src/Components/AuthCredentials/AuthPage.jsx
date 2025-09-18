@@ -1,10 +1,12 @@
+
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import AuthToggle from "./AuthToggle";
 import AuthMethodSelector from "./AuthMethodSelector";
 import GoogleAuth from "./GoogleAuth";
 import AuthForm from "./AuthForm";
-import { Shield } from "lucide-react";
+import { Shield, CheckCircle } from "lucide-react";
+import { sendOtp, verifyOtp, signup, login } from "../../utils/api"; // ✅ backend API
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,10 +14,11 @@ const AuthPage = () => {
   const [showOtp, setShowOtp] = useState(false);
   const [otpTimer, setOtpTimer] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState(""); // ✅ error state
 
   const [formData, setFormData] = useState({
     email: "",
-    phone: "",
+    phonenumber: "",
     password: "",
     confirmPassword: "",
     fullName: "",
@@ -36,9 +39,21 @@ const AuthPage = () => {
     setFormData((s) => ({ ...s, [name]: value }));
   };
 
-  const handleSendOtp = () => {
-    setShowOtp(true);
-    setOtpTimer(30);
+  // ✅ Send OTP with backend
+  const handleSendOtp = async () => {
+    if (!formData.phonenumber) {
+      setError("Enter phone number first");
+      return;
+    }
+    try {
+      await sendOtp({ phonenumber: formData.phonenumber });
+      setShowOtp(true);
+      setOtpTimer(30);
+      setError("");
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || "Error sending OTP");
+    }
   };
 
   const handleGoogleAuth = () => {
@@ -46,24 +61,47 @@ const AuthPage = () => {
     setTimeout(() => setShowSuccess(false), 3000);
   };
 
-  const handleSubmit = (e) => {
+  // ✅ Submit handler with backend integration
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      setError(""); // clear before new submit
 
-    if (authMethod === "phone" && !showOtp) {
-      handleSendOtp();
-      return;
+      if (authMethod === "phonenumber") {
+        if (!showOtp) {
+          await handleSendOtp();
+          return;
+        } else {
+          await verifyOtp({ phonenumber: formData.phonenumber, otp: formData.otp });
+          await signup(formData); // signup after OTP verification
+        }
+      } else if (authMethod === "email") {
+        if (isLogin) {
+          await login({ email: formData.email, password: formData.password });
+        } else {
+          if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match");
+            return;
+          }
+          await signup(formData);
+        }
+      }
+
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || "Authentication failed");
     }
-
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   const toggleForm = () => {
     setIsLogin((s) => !s);
     setShowOtp(false);
+    setError("");
     setFormData({
       email: "",
-      phone: "",
+      phonenumber: "",
       password: "",
       confirmPassword: "",
       fullName: "",
@@ -76,10 +114,11 @@ const AuthPage = () => {
   const switchAuthMethod = (method) => {
     setAuthMethod(method);
     setShowOtp(false);
+    setError("");
     setFormData((s) => ({
       ...s,
       email: "",
-      phone: "",
+      phonenumber: "",
       password: "",
       confirmPassword: "",
       otp: "",
@@ -88,9 +127,6 @@ const AuthPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 overflow-x-hidden relative">
-      {/* encapsulated background animation */}
-      {/* <BackgroundAnimation /> */}
-
       {/* Navigation */}
       <Navbar />
 
@@ -100,8 +136,7 @@ const AuthPage = () => {
           {/* Logo / header */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-green-600 rounded-full mb-6 shadow-xl">
-                <Shield className="text-white" size={32} />
-              {/* Shield icon is inside AuthForm */}
+              <Shield className="text-white" size={32} />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               {isLogin ? "Welcome Back" : "Join सहGovern"}
@@ -116,7 +151,10 @@ const AuthPage = () => {
           {/* Toggle, method selector & form */}
           <AuthToggle isLogin={isLogin} setIsLogin={setIsLogin} />
           <div className="mt-4" />
-          <AuthMethodSelector authMethod={authMethod} setAuthMethod={switchAuthMethod} />
+          <AuthMethodSelector
+            authMethod={authMethod}
+            setAuthMethod={switchAuthMethod}
+          />
 
           {authMethod === "google" ? (
             <div className="mt-6">
@@ -130,13 +168,11 @@ const AuthPage = () => {
                 formData={formData}
                 onChange={handleInputChange}
                 showOtp={showOtp}
-                setShowOtp={setShowOtp}
                 otpTimer={otpTimer}
-                setOtpTimer={setOtpTimer}
                 handleSendOtp={handleSendOtp}
                 handleSubmit={handleSubmit}
                 toggleForm={toggleForm}
-                setIsLogin={setIsLogin}
+                error={error} // ✅ pass error
               />
             </div>
           )}
@@ -153,7 +189,9 @@ const AuthPage = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
               {isLogin ? "Welcome Back!" : "Account Created!"}
             </h3>
-            <p className="text-gray-600 mb-6">Authentication was successful.</p>
+            <p className="text-gray-600 mb-6">
+              Authentication was successful.
+            </p>
             <button
               onClick={() => {}}
               className="bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-3 rounded-full hover:from-blue-700 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium"
