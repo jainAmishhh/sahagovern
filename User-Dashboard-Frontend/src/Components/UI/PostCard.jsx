@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+// import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   Heart,
   MessageCircle,
@@ -16,7 +16,7 @@ import {
   BellOff,
   X,
 } from "lucide-react";
-import store from "../../redux/store";
+import { store } from "../../redux/store";
 
 const PostCard = ({
   post,
@@ -49,11 +49,11 @@ const PostCard = ({
         <div className="flex items-center space-x-3">
           {/* avatar can be emoji or image */}
           <div className="h-10 w-10 flex items-center justify-center rounded-full border border-gray-200 bg-gray-100 text-xl">
-            {/* {post.user.avatar} */}
-            <Avatar className='w-6 h-6'>
+            {post.user.avatar}
+            {/* <Avatar className='w-6 h-6'>
               <AvatarImage src="" alt="" />
               <AvatarFallback></AvatarFallback>
-            </Avatar>
+            </Avatar> */}
           </div>
           <div>
             <div className="flex items-center gap-1">
